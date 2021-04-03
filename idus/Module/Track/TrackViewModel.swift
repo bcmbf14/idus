@@ -14,7 +14,6 @@ protocol TrackViewModelType {
     var track: Driver<Track> { get }
 }
 
-
 struct TrackViewModel:TrackViewModelType {
     
     // MARK: <- Event
@@ -34,9 +33,8 @@ struct TrackViewModel:TrackViewModelType {
         
         let onError = PublishSubject<Error>()
         showAlert = onError
-            .map { error -> (String, String) in
-                return ("Error", error.localizedDescription)
-            }.asDriver(onErrorJustReturn: ("Error", "Unknown Error"))
+            .map { error -> (String, String) in return ("Error", error.localizedDescription)}
+            .asDriver(onErrorJustReturn: ("Error", "Unknown Error"))
         
         track = Observable<Void>
             .merge([viewWillAppear])

@@ -17,8 +17,8 @@ final class TrackViewController: UIViewController {
     @IBOutlet weak var fullScrollView: UIScrollView!
     @IBOutlet weak var sliderCollectionView: UICollectionView!
     @IBOutlet weak var fileSizeLabel: UILabel!
-    @IBOutlet weak var toggleStackView: UIStackView!
-    @IBOutlet weak var toggleButton: UIButton!
+    @IBOutlet weak var releaseNotesToggleStackView: UIStackView!
+    @IBOutlet weak var releaseNotesToggleButton: UIButton!
     @IBOutlet weak var releaseNotesLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var tagView: TagListView!
@@ -32,40 +32,61 @@ final class TrackViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        configureSliderCollectionView()
+        configureFullScrollView()
+        configureReleaseNotesLabel()
+        configureFileSizeLabel()
+        configureTagView()
+        configureReleaseNotesToggleButton()
+        configureIndicatorView()
+        addIndicatorView()
+        
+        
         setupEventBinding()
         setupUIBinding()
     }
     
     // MARK: Setup UI
     
-    private func setupUI(){
+    private func configureSliderCollectionView(){
         sliderCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
         sliderCollectionView.register(UINib(nibName: SliderCollectionViewCell.reuseIdentifier, bundle: nil), forCellWithReuseIdentifier: SliderCollectionViewCell.reuseIdentifier)
         sliderCollectionView.bounces = false
-        
+    }
+    
+    private func configureFullScrollView(){
         fullScrollView.bounces = false
-        
+    }
+    
+    private func configureReleaseNotesLabel(){
         releaseNotesLabel.isHidden = true
-        
-        
+        releaseNotesLabel.textColor = .highlightColor
+    }
+    
+    private func configureFileSizeLabel(){
+        fileSizeLabel.textColor = .highlightColor
+    }
+    
+    private func configureTagView(){
         tagView.textFont = UIFont.systemFont(ofSize: 15)
         tagView.textColor = .highlightColor
         tagView.tagBackgroundColor = .white
         tagView.borderColor = .lightGray
         tagView.borderWidth = 1
         tagView.cornerRadius = 5
-        
-        [fileSizeLabel, releaseNotesLabel].forEach {
-            $0?.textColor = .highlightColor
-        }
-        
-        toggleButton.setTitleColor(.highlightColor, for: .normal)
-        toggleButton.setTitleColor(.highlightColor, for: .selected)
-        
+    }
+    
+    private func configureReleaseNotesToggleButton(){
+        releaseNotesToggleButton.setTitleColor(.highlightColor, for: .normal)
+        releaseNotesToggleButton.setTitleColor(.highlightColor, for: .selected)
+    }
+    
+    private func configureIndicatorView(){
         indicatorView.color = .link
         indicatorView.center = view.center
-        
+    }
+    
+    private func addIndicatorView(){
         view.addSubview(indicatorView)
     }
     
@@ -81,45 +102,20 @@ final class TrackViewController: UIViewController {
     
     private func setupUIBinding() {
         viewModel.track
-            .map{($0.screenshotUrls ?? [])}
-            .drive(sliderCollectionView.rx.items(cellIdentifier: SliderCollectionViewCell.reuseIdentifier, cellType: SliderCollectionViewCell.self)) { index, item, cell in
-                cell.setImage(item)
+            .filter{$0.screenshotUrls != nil}
+            .map{$0.screenshotUrls!}
+            .drive(sliderCollectionView.rx.items(cellIdentifier: SliderCollectionViewCell.reuseIdentifier, cellType: SliderCollectionViewCell.self)) { _, screenshotUrls, cell in
+                cell.imageView.setImage(with: screenshotUrls)
             }
             .disposed(by: disposeBag)
         
         viewModel.track
-            .map{$0.trackName}
-            .drive(onNext: { [weak self] t in
-                self?.title = t
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.track
-            .map{$0.description}
-            .drive(onNext: { [weak self] d in
-                self?.descriptionLabel.text = d
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.track
-            .map{$0.fileSizeBytes}
-            .drive(onNext: { [weak self] f in
-                self?.fileSizeLabel.text = f.toMegaByte()
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.track
-            .map{$0.releaseNotes}
-            .drive(onNext: { [weak self] r in
-                self?.releaseNotesLabel.text = r
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.track
-            .map{$0.genres}
-            .drive(onNext: { [weak self] g in
-                guard let tags = g else {return}
-                self?.tagView.addTags(tags.map{" #\($0) "})
+            .drive(onNext: { [weak self] track in
+                self?.title = track.trackName
+                self?.descriptionLabel.text = track.description
+                self?.fileSizeLabel.text = track.fileSizeBytes.toMegaByte()
+                self?.releaseNotesLabel.text = track.releaseNotes
+                if let tags = track.genres { self?.tagView.addTags(tags.map{" #\($0) "}) }
             })
             .disposed(by: disposeBag)
         
@@ -152,12 +148,12 @@ final class TrackViewController: UIViewController {
         }
     }
     
-    @IBAction func toggle(_ sender: UIButton) {
-        toggleButton.isSelected = !toggleButton.isSelected
+    @IBAction func didTapReleaseNotesLabel(_ sender: UIButton) {
+        releaseNotesToggleButton.isSelected = !releaseNotesToggleButton.isSelected
         
         UIView.animate(withDuration: 0.3) {
             self.releaseNotesLabel.isHidden = !sender.isSelected
-            self.toggleStackView.layoutIfNeeded()
+            self.releaseNotesToggleStackView.layoutIfNeeded()
         }
     }
 }

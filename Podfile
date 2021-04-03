@@ -9,5 +9,5 @@ target 'idus' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'TagListView'
-
+  pod 'Kingfisher'
 end

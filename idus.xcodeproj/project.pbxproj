@@ -23,7 +23,7 @@
 		A8F66A99260C6E92002C3732 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F66A98260C6E92002C3732 /* APIService.swift */; };
 		A8F66AAA260C7509002C3732 /* TrackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F66AA9260C7509002C3732 /* TrackViewModel.swift */; };
 		A8F66AB4260C8619002C3732 /* String+toMegaByte.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F66AB3260C8619002C3732 /* String+toMegaByte.swift */; };
-		A8F66AB8260C9BF6002C3732 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F66AB7260C9BF6002C3732 /* ImageCacheManager.swift */; };
+		A8F66AB8260C9BF6002C3732 /* UIImageView+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F66AB7260C9BF6002C3732 /* UIImageView+Cache.swift */; };
 		BBC4C241FEB87FF9B5CDA782 /* Pods_idus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33D940402EDF5989CC5E8550 /* Pods_idus.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +48,7 @@
 		A8F66A98260C6E92002C3732 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		A8F66AA9260C7509002C3732 /* TrackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewModel.swift; sourceTree = "<group>"; };
 		A8F66AB3260C8619002C3732 /* String+toMegaByte.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+toMegaByte.swift"; sourceTree = "<group>"; };
-		A8F66AB7260C9BF6002C3732 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
+		A8F66AB7260C9BF6002C3732 /* UIImageView+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Cache.swift"; sourceTree = "<group>"; };
 		F0BDC02AC3565F699A0BDBA6 /* Pods-idus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-idus.debug.xcconfig"; path = "Target Support Files/Pods-idus/Pods-idus.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,7 +129,7 @@
 				A8F66A81260C6DEF002C3732 /* Reactive+Base.swift */,
 				A8F66A84260C6E0A002C3732 /* Data+Decode.swift */,
 				A8F66AB3260C8619002C3732 /* String+toMegaByte.swift */,
-				A8F66AB7260C9BF6002C3732 /* ImageCacheManager.swift */,
+				A8F66AB7260C9BF6002C3732 /* UIImageView+Cache.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -289,7 +289,7 @@
 			files = (
 				A8F66AAA260C7509002C3732 /* TrackViewModel.swift in Sources */,
 				A8F66A71260C6A3D002C3732 /* Track.swift in Sources */,
-				A8F66AB8260C9BF6002C3732 /* ImageCacheManager.swift in Sources */,
+				A8F66AB8260C9BF6002C3732 /* UIImageView+Cache.swift in Sources */,
 				A8F66A99260C6E92002C3732 /* APIService.swift in Sources */,
 				A8F66A7D260C6DBF002C3732 /* UIColor+BaseColor.swift in Sources */,
 				A8F66AB4260C8619002C3732 /* String+toMegaByte.swift in Sources */,

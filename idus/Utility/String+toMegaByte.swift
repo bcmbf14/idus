@@ -9,9 +9,9 @@ import Foundation
 
 extension String {
     func toMegaByte() -> String {
-            let bcf = ByteCountFormatter()
-            bcf.allowedUnits = [.useMB] // optional: restricts the units to MB only
-            bcf.countStyle = .file
-            return bcf.string(fromByteCount: Int64(self) ?? 0)
+        let byteCountFormatter = ByteCountFormatter()
+        byteCountFormatter.allowedUnits = [.useMB]
+        byteCountFormatter.countStyle = .file
+        return byteCountFormatter.string(fromByteCount: Int64(self) ?? 0)
     }
 }
