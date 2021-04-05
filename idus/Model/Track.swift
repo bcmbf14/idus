@@ -13,12 +13,12 @@ struct Tracks: Decodable {
 
 struct Track: Decodable {
     let trackName: String
-    let screenshotUrls: [String]?
+    let screenshotUrls: [String]? //imageurls
     let fileSizeBytes: String
     let version: String
     let releaseNotes: String?
     let description: String?
-    let genres: [String]?
+    let genres: [String]? //tag
     
     static let dummy = Track(trackName: "trackName",
                              screenshotUrls: nil,

@@ -8,7 +8,7 @@
 import Foundation
 
 extension String {
-    func toMegaByte() -> String {
+    var toMegaByte:String {
         let byteCountFormatter = ByteCountFormatter()
         byteCountFormatter.allowedUnits = [.useMB]
         byteCountFormatter.countStyle = .file

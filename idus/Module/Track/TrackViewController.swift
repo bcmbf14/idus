@@ -23,6 +23,7 @@ final class TrackViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var tagView: TagListView!
     
+    
     // MARK: Properties
     
     private let indicatorView = UIActivityIndicatorView(style: .large)
@@ -113,7 +114,7 @@ final class TrackViewController: UIViewController {
             .drive(onNext: { [weak self] track in
                 self?.title = track.trackName
                 self?.descriptionLabel.text = track.description
-                self?.fileSizeLabel.text = track.fileSizeBytes.toMegaByte()
+                self?.fileSizeLabel.text = track.fileSizeBytes.toMegaByte
                 self?.releaseNotesLabel.text = track.releaseNotes
                 if let tags = track.genres { self?.tagView.addTags(tags.map{" #\($0) "}) }
             })

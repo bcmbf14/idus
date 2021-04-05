@@ -10,7 +10,9 @@ import RxSwift
 
 protocol TrackViewModelType {
     var viewWillAppear: PublishSubject<Void> { get }
+    
     var isNetworking: Driver<Bool> { get }
+    var showAlert: Driver<(String, String)> { get }
     var track: Driver<Track> { get }
 }
 
@@ -22,10 +24,10 @@ struct TrackViewModel:TrackViewModelType {
     
     // MARK: <- UI
     
-    let track: Driver<Track>
     let isNetworking: Driver<Bool>
     let showAlert: Driver<(String, String)>
-    
+    let track: Driver<Track>
+
     
     init () {
         let onNetworking = PublishSubject<Bool>()
